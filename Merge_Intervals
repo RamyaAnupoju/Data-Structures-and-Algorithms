@@ -1,0 +1,27 @@
+"""
+Given an array of intervals where intervals[i] = [starti, endi],
+merge all overlapping intervals, and return an array of the
+non-overlapping intervals that cover all the intervals in the input.
+Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+"""
+
+class Solution:
+    def merge(self, intervals):
+        left = 0
+        intervals.sort()
+        while left < len(intervals) - 1:
+            right = left + 1
+            interval = intervals[left] + intervals[right]
+            if interval[1] >= interval[2]:
+                intervals[left][0] = min(intervals[left][0], intervals[right][0])
+                intervals[left][1] = max(intervals[left][1], intervals[right][1])
+                intervals.pop(right)
+            else:
+                left += 1
+        return intervals
+
+cl = Solution()
+mergedList = cl.merge([[1,3],[2,6],[8,10],[15,18]])
+print(mergedList)
