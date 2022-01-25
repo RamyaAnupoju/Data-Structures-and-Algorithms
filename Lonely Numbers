@@ -1,0 +1,26 @@
+"""
+You are given an integer array nums. A number x is lonely when it appears only once, and no adjacent numbers (i.e. x + 1 and x - 1) appear in the array.
+Return all lonely numbers in nums. You may return the answer in any order.
+Input: nums = [10,6,5,8]
+Output: [10,8]
+"""
+class Solution:
+    def findLonely(self, nums: List[int]) -> List[int]:
+        lonely = []
+        nums.sort()
+        if(len(nums)==1):
+            return nums
+        for i in range(1,len(nums)-1):
+            if nums[i-1] < nums[i]-1 and nums[i+1] > nums[i]+1:
+                lonely.append(nums[i])
+            else:
+                continue
+        if nums[1] > nums[0]+1:
+            lonely.append(nums[0])
+        if nums[-2] < nums[-1]-1:
+            lonely.append(nums[-1])
+        return lonely
+
+cl = Solution()
+lonelyNums = cl.findLonely([10,6,5,8])
+print(lonelyNums)
