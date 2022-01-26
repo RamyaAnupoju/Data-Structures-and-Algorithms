@@ -1,0 +1,27 @@
+"""
+Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+Input: root = [3,9,20,null,null,15,7]
+Output: [[3],[9,20],[15,7]]
+"""
+
+def levelOrder(root):
+    queue = collections.deque()
+    res = []
+    queue.append(root)
+    while queue:
+        qlen = len(queue)
+        level  =[]
+        """
+        for each element in the level, pop the element, add its left and right child.
+        after iterating through all the elements in that level, add the list of elements in that level to the result
+        """
+        for i in range(qlen):
+            root = queue.popleft()
+            if root:
+                level.append(root.val)
+                queue.append(root.left)
+                queue.append(root.right)
+        if level:
+            res.append(level)
+    print(res)
+            
