@@ -1,0 +1,18 @@
+"""
+Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+"""
+def isSymmetric(self, root):
+    if not root:
+        return True
+    stack = [(root.left, root.right)]
+    while stack:
+        l, r = stack.pop()
+        if not l and not r:
+            continue
+        if not l or not r or (l.val != r.val):
+            return False
+        stack.append((l.left, r.right))
+        stack.append((l.right, r.left))
+    Print(True)
